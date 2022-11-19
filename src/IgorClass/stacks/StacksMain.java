@@ -1,6 +1,6 @@
 package IgorClass.stacks;
 
-public class main {
+public class StacksMain {
 
     public static void main(String[] args) {
         int[] array = {1,5,7,9};
