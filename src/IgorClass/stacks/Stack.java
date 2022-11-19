@@ -1,4 +1,4 @@
-package IgorClass;
+package IgorClass.stacks;
 
 public class Stack  {
     private int data[] ;
