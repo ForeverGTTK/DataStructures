@@ -1,49 +1,40 @@
 package IgorClass.Queue;
 
-public class Queue {
+import java.util.ArrayList;
 
-    private int queueList[];
+public class Queue <T extends Comparable<T>> {
+
+    private ArrayList<T> queueList;
     private int tail = 0;
     private int head = 0;
 
-    public Queue (int[] QueueList, int size){
-        this(size);
-        loadQueue(QueueList);
+    public Queue (T[] queueList){
+        this.queueList = new ArrayList<T>();
+        loadQueue(queueList);
     }
 
-    public Queue (int size){
-        this.queueList = new int [size];
+    public Queue (){
+    this(null);
     }
 
-    public void loadQueue (int[] listToInput){
+    public void loadQueue (T[] listToInput){
         for (int i=0;i<listToInput.length;i++){
             enqueue(listToInput[i]);
         }
     }
 
-    public void enqueue (int data) {
-        this.queueList[head]=data;
-        if (head < queueList.length-1)
+    public void enqueue (T data) {
+        this.queueList.add(data);
         head++;
-        else {
-            if (tail>0)
-            {
-                head=0;
-            }
-            System.out.println("no Space");
-        }
-
     }
 
-    public int front (){
-        return this.queueList[tail];
+    public T front (){
+        return this.queueList.get(tail);
 
     }
 
     public int size (){
         int size = head-tail;
-        if (size <0)
-            return tail-head;
         return size;
     }
 
@@ -55,17 +46,9 @@ public class Queue {
         return false;
     }
 
-    public int dequeue (){
-        int temp = queueList[tail];
-        if (!isEmpty() && tail < queueList.length){
+    public T dequeue (){
+        T temp = queueList.get(tail);
         tail++;
-        }else if (tail == queueList.length){
-            tail =0;
-        }
-        else if (isEmpty()){
-            System.out.println("nothing to Dequeue");
-            return -1;
-        }
         return temp;
     }
 
@@ -73,14 +56,12 @@ public class Queue {
         System.out.print(
                         "The queue holds "+
                         size() +
-                        "values and can hold up to: "+
-                        this.queueList.length+
+                        " values and can hold up to: "+
+                        this.queueList.size()+
                         " values\n\t["
         );
-        for (int i=this.tail;i != head; i++ ){
-            System.out.print(queueList[i]+ ", ");
-            if (i == queueList.length-1)
-                i = -1;
+        for (int i=this.tail;i < this.head; i++ ){
+            System.out.print(this.queueList.get(i)+ ", ");
         }
         System.out.println("]");
     }
