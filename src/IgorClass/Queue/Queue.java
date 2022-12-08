@@ -2,6 +2,13 @@ package IgorClass.Queue;
 
 import java.util.ArrayList;
 
+
+/**
+ * this class represents a Queue
+ *
+ * @author Guy Tuval
+ *
+ */
 public class Queue <T extends Comparable<T>> {
 
     private ArrayList<T> queueList;

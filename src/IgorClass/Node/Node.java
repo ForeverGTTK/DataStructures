@@ -1,5 +1,9 @@
 package IgorClass.Node;
 
+import IgorClass.Node.Trees.BInaryTree;
+import IgorClass.Node.Trees.LinkedList_node;
+import IgorClass.Queue.Queue;
+
 /**
  *
  * this class represents a Node
@@ -95,6 +99,13 @@ public abstract class Node <T extends Comparable <T>> {
     }
 
     /**
+     * Gets the number of children of the node
+     * @return returns node Size
+     */
+    public int size (){
+        return this.nodeSize;
+    }
+    /**
      * Sets the chilld to the 'index' position of the node child list
      * REWRITES CURRENT CHILD IF EXISTS !!
      * @param index the postion to set in the list
@@ -104,6 +115,6 @@ public abstract class Node <T extends Comparable <T>> {
         this.child[index] = child;
         this.child[index].parent=this;
     }
-
-    public abstract Node next();
+    public void printNode () {
+    }
 }

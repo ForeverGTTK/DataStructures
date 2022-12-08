@@ -1,4 +1,6 @@
-package IgorClass.Node;
+package IgorClass.Node.Trees;
+
+import IgorClass.Node.Node;
 
 /**
  * this Class represents a linked list implementing nodes
@@ -49,6 +51,7 @@ public class LinkedList_node <T extends Comparable<T>> extends Node {
             this.next().insert(toInsert);
         }
     }
+
 
     /**
      * Sets a child to a sepcific node

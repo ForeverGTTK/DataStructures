@@ -1,5 +1,6 @@
 package IgorClass.stacks;
 
+
 public class Stack  {
     private int data[] ;
     private int stackStart=0;
@@ -47,7 +48,7 @@ public class Stack  {
     public void printStack()
     {
         System.out.print("the stack contains [");
-        for (int i=0;i<data.length;i++){
+        for (int i=0;i<this.nextItem;i++){
             System.out.print(data[i]+", ");
         }
         System.out.println("]");
