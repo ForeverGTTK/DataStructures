@@ -6,11 +6,13 @@ import IgorClass.Queue.Queue;
 
 /**
  *
- * this class represents a Node
+ * this class represents a generic Node
  *
  * @author Guy Tuval
  */
-public abstract class Node <T extends Comparable <T>> {
+public class Node <T> {
+
+    private static int total_Nodes_Created = 0;
     //-------------------------------------- Attributes ----------------------------------------------------------//
 
     /**
@@ -29,6 +31,10 @@ public abstract class Node <T extends Comparable <T>> {
      * the parent node , if null then its the Root node
      */
     private Node parent;
+    /**
+     *the farthest route to a leaf
+     */
+    protected int nodeDgree=0;
     //-------------------------------------- Constructor----------------------------------------------------------//
 
     /**
@@ -61,6 +67,8 @@ public abstract class Node <T extends Comparable <T>> {
         this.parent=parent;
         this.nodeSize= size;
         this.child = new Node[this.nodeSize];
+        total_Nodes_Created++;
+
     }
     //-------------------------------------- Methods ----------------------------------------------------------//
 
@@ -109,12 +117,52 @@ public abstract class Node <T extends Comparable <T>> {
      * Sets the chilld to the 'index' position of the node child list
      * REWRITES CURRENT CHILD IF EXISTS !!
      * @param index the postion to set in the list
-     * @param child the child to set in the list
+     * @param toSet the child to set in the list
      */
-    protected void setChild(int index ,Node child){
-        this.child[index] = child;
-        this.child[index].parent=this;
+    protected void setChild(int index ,Node toSet){
+        toSet.parent=this;
+        this.child[index] = toSet;
+        updateHeight();
     }
-    public void printNode () {
+
+    /**
+     * get the dgree of the current node
+     * @return returns the dgree of the node
+     */
+    public int getNodeDgree() {
+        if (this == null){
+            return -1;
+        }
+        return nodeDgree;
     }
-}
+
+    /**
+     * updates the hight form current node down
+     */
+    protected void updateHeight (){
+        if (this== null){
+            this.nodeDgree =-1;
+            return;
+        }
+        Node currentMax=null;
+        for (int i=0; i<this.nodeSize;i++) {
+            try{
+                if (currentMax == null ||this.getChild(i).getNodeDgree() > currentMax.nodeDgree){
+                currentMax= this.getChild(i);
+            }
+                if (this.getChild(i)==null){
+
+                }
+                this.getChild(i).updateHeight();
+            }
+            catch (NullPointerException ex){
+                continue;
+            }
+        }
+        this.nodeDgree = currentMax.getNodeDgree()+1;
+        }
+
+
+        }
+
+

@@ -26,19 +26,18 @@ public class NodePlayGround {
        lLsRoot.printLIst();
         lLsRoot.insert(new LinkedList_node<>(7));
         lLsRoot.printLIst();
+        System.out.println("");
 
         System.out.println("\n********************* Binary Tree************************************");
 
         BInaryTree bInaryTree = new BInaryTree<Integer>(7);
-        for (int j=0,i=0; j<list.length;j++,i++){
-        if (i<=1){
+        for (int j=0,i=0; j<list.length-1;j++,i++){
             bInaryTree.insert(new BInaryTree<>(list[j]),i);
+            if (i==1){
+                i=-1;
+                }
         }
-        else{
-            i=0;
-        }
-    }
-        BFS(bInaryTree);
+        bInaryTree.printTree();
     }
 
 }

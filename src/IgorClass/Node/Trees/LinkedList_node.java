@@ -7,7 +7,7 @@ import IgorClass.Node.Node;
  *
  * @author Guy Tuval
  */
-public class LinkedList_node <T extends Comparable<T>> extends Node {
+public class LinkedList_node <T> extends Node {
     //-------------------------------------- Finals ----------------------------------------------------------//
     /**
      * default node child list size

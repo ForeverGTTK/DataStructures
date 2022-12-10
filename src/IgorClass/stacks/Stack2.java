@@ -2,7 +2,9 @@ package IgorClass.stacks;
 
 /**
  * this Class represents a Stack of Integers
- * the stack requiers a size allocation to initialize
+ * the stack requires a size allocation to initialize
+ *
+ * @author Guy Tuval
  */
 public class Stack2 {
     /****************** Attributes ******************/
@@ -21,7 +23,7 @@ public class Stack2 {
      * @param stackSize The Max capacity of the stack.
      * @param values an Array of data in the stack
      */
-    public Stack2(int stackSize, int[]values){
+    public Stack2(int stackSize, int[] values){
     this(stackSize);
     this.push(values);
     }
