@@ -7,7 +7,7 @@ import IgorClass.Node.Node;
  *
  * @author Guy Tuval
  */
-public class LinkedList_node <T> extends Node {
+public class LinkedList_node <T> extends Tree {
     //-------------------------------------- Finals ----------------------------------------------------------//
     /**
      * default node child list size

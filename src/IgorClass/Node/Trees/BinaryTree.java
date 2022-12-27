@@ -1,6 +1,6 @@
 package IgorClass.Node.Trees;
 
-import IgorClass.Node.Trees.Tree;
+import IgorClass.Node.Node;
 import IgorClass.Queue.Queue;
 
 /**
@@ -8,21 +8,21 @@ import IgorClass.Queue.Queue;
  *
  * @author  Guy Tuval
  */
-public class BInaryTree <T> extends Tree {
+public class BinaryTree<T> extends Tree {
     //-------------------------------------- Finals ----------------------------------------------------------//
     /**
      * default node child list size
      */
-    private static final int DEFAULT_CHILD_SIZE =2;
+    protected static final int DEFAULT_CHILD_SIZE =2;
 
     /**
      * Left child index
      */
-    private static final int LEFT_CHILD_INDEX =0;
+    protected static final int LEFT_CHILD_INDEX =0;
     /**
      * Right child index
      */
-    private static final int RIGHT_CHILD_INDEX =1;
+    protected static final int RIGHT_CHILD_INDEX =1;
 //-------------------------------------- Constructor ----------------------------------------------------------//
     /**
      * Constructor
@@ -30,7 +30,7 @@ public class BInaryTree <T> extends Tree {
      * @param data The data of the node
      * @param root The parent of the node
      */
-    public BInaryTree (T data, BInaryTree root){
+    protected BinaryTree(T data, BinaryTree root){
         super(data,root,DEFAULT_CHILD_SIZE);
     }
 
@@ -39,49 +39,92 @@ public class BInaryTree <T> extends Tree {
      *
      * @param data the data of the node
      */
-    public BInaryTree(T data){
+    protected BinaryTree(T data){
         this(data,null);
     }
+
+
 //-------------------------------------- Constructor ----------------------------------------------------------//
 
     /**
      * insert a node to the 'Left' child place of the node
      * @param toInsert a node to insert to the tree
      */
-    public void insertLeft(BInaryTree toInsert){
-        if (this.next(LEFT_CHILD_INDEX) == null){
+    protected boolean insertLeft(BinaryTree toInsert){
+        if (this.leftChild() == null){
             this.setChild(LEFT_CHILD_INDEX,toInsert);
+            return true;
         }
+        return false;
     }
     /**
      * insert a node to the 'Right' child place of the node
      * @param toInsert a node to insert to the tree
      */
-    public void insertRight(BInaryTree toInsert){
-        if (this.next(RIGHT_CHILD_INDEX)== null){
+    protected boolean insertRight(BinaryTree toInsert){
+        if (this.rightChild()== null){
             this.setChild(RIGHT_CHILD_INDEX, toInsert);
+            return true;
         }
+        return false;
+    }
+
+    protected BinaryTree leftChild(){
+        return this.next(LEFT_CHILD_INDEX);
+    }
+
+    protected BinaryTree rightChild(){
+        return this.next(RIGHT_CHILD_INDEX);
     }
     /**
      * insert a node to the 'Index' child place of the node
      * @param toInsert a node to insert to the tree
      * @param index index to insert child to
      */
-    public void insert(BInaryTree toInsert, int index) {
-        if (index == LEFT_CHILD_INDEX && this.next(LEFT_CHILD_INDEX)== null){
-            this.insertLeft(toInsert);
+    public boolean insert(BinaryTree toInsert, int index) {
+        if (index == LEFT_CHILD_INDEX ){
+            if ( !this.insertLeft(toInsert)){
+             return false;
+            }
         }
-        else if ( index == RIGHT_CHILD_INDEX && this.next(RIGHT_CHILD_INDEX)== null) {
-            this.insertRight(toInsert);
+        else if ( index == RIGHT_CHILD_INDEX ) {
+            if (!this.insertRight(toInsert)){
+                return false;
+            }
         }
         else if (index!=LEFT_CHILD_INDEX && index != RIGHT_CHILD_INDEX){
             System.out.println("index does not exsist , nothing happened");
-            return;
+            return false;
         }
         else {
-            this.next(index).insert(toInsert,index);
+           return false;
         }
+        return true;
     }
+
+//    public void delete (BinaryTree toDelete){
+//        BinaryTree thisParent = (BinaryTree)toDelete.getParent();
+//        BinaryTree newChild;
+//        int toDeleteIndex=-1;
+//        for (int i=0;i<thisParent.size();i++){
+//            if (toDelete == thisParent.getChild(i)){
+//                toDeleteIndex = i;
+//                break;
+//            }
+//        }
+//        for (int i=this.size()-1;i>=0;i--) {
+//            newChild = toDelete.next(i);
+//            if (newChild!= null){
+//                thisParent.insert(newChild,toDeleteIndex);
+//                for (int j=0; j<this.size();j++)
+//                    if (toDelete.next(j)!= null)
+//                    if (!newChild.insert(toDelete.next(j),i)){
+//                        newChild.next(i).insert(toDelete.next(j),i);
+//                    }
+//            }
+//        }
+//
+//    }
 
     /**
      * Gets the node in the 'childIndex' location of the child list
@@ -89,9 +132,9 @@ public class BInaryTree <T> extends Tree {
      * @param childIndex The index of the child you want to inport
      * @return returns the child in the index location
      */
-    public BInaryTree next (int childIndex)
+    protected BinaryTree next (int childIndex)
     {
-    return  childIndex ==RIGHT_CHILD_INDEX||childIndex==LEFT_CHILD_INDEX ? (BInaryTree)this.getChild(childIndex): null;
+    return  childIndex ==RIGHT_CHILD_INDEX||childIndex==LEFT_CHILD_INDEX ? (BinaryTree)this.getChild(childIndex): null;
     }
 
     /**
@@ -99,9 +142,9 @@ public class BInaryTree <T> extends Tree {
      */
     public void printTree () {
         this.updateHeight();
-        Queue<BInaryTree> queue = new Queue(this);
+        Queue<BinaryTree> queue = new Queue(this);
         Queue<String> signs = new Queue<>();
-        BInaryTree current;
+        BinaryTree current;
         int currntLevel=this.nodeDgree+1;
         do{
             int qSize = queue.size();
@@ -179,4 +222,5 @@ public class BInaryTree <T> extends Tree {
         }
         return num;
     }
+
 }
