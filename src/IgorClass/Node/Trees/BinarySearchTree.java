@@ -46,6 +46,7 @@ public class BinarySearchTree <T> extends BinaryTree {
                 this.rightChild().insert(toInsert);
             }
         }
+
     }
 
     public BinarySearchTree find (T toFind) {
@@ -61,7 +62,6 @@ public class BinarySearchTree <T> extends BinaryTree {
         }else{
             return this.rightChild().find(toFind);
         }
-
     }
 
     public void findANDdelete(T toFindDelete){

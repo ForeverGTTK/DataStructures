@@ -27,12 +27,14 @@ public class AVLtree <T> extends BinarySearchTree {
     //-------------------------------------- Methods ----------------------------------------------------------//
 
     public AVLtree getParent(){
-        super.getParent();
+       return (AVLtree) super.getParent();
     }
 
     public void insert(AVLtree toInsert ){
         super.insert(toInsert);
+        super.updateHeight();
         toInsert.updateHeight();
+
     }
 
     public void updateHeight(){
@@ -48,10 +50,10 @@ public class AVLtree <T> extends BinarySearchTree {
         }
         int hDif = leftChildHeight- rightChildHeight;
         if ( hDif >1){     // Left Heavy - rotate right
-         this.rotateRight();
+//         this.rotateRight();
         }
         else if (hDif< -1){ // Right Heavy - rotate left
-            this.rotateLeft();
+//            this.rotateLeft();
         }
         AVLtree parent = (AVLtree) this.getParent();
         parent.updateHeight();

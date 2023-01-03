@@ -148,28 +148,22 @@ public class Node <T extends Comparable<? super T>> {
      */
     protected void updateHeight() {
         if (this == null) {
-            this.nodeDgree = -1;
             return;
         }
-        Node currentMax = null;
-        for (int i = 0; i < this.nodeSize; i++) {
-            try {
-                this.getChild(i).updateHeight();
-                if (currentMax == null || this.getChild(i).getNodeDgree() > currentMax.nodeDgree) {
-                    currentMax = this.getChild(i);
-                }
+        int currentMax = -1;
 
-            } catch (NullPointerException ex) {
-                this.nodeDgree = 0;
-                continue;
+        for (int i = 0; i < this.nodeSize; i++) {
+                if (this.getChild(i)== null){
+                   continue;
+                }
+                this.getChild(i).updateHeight();
+                if ( this.getChild(i).getNodeDgree() >= currentMax) {
+                    currentMax = this.getChild(i).nodeDgree+1;
+                }
             }
+            this.nodeDgree= currentMax;
         }
-        try {
-            this.nodeDgree = currentMax.getNodeDgree() + 1;
-        } catch (NullPointerException ex) {
-            this.nodeDgree = 0;
-        }
+
 
 
     }
-}
