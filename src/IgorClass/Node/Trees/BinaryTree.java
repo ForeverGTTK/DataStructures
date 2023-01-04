@@ -165,13 +165,13 @@ public class BinaryTree<T> extends Tree {
                 signs.enqueue("\\");
                 if (current==null){
                     System.out.print(
-                            writeSpaces(powerOf(currntLevel)-3) +
+                            writeSpaces(powerOf(currntLevel)-2) +
                             "<_>"+                                              // null data
                             writeSpaces(powerOf(currntLevel)-3)
                     );
                 }else{
                     System.out.print(
-                        writeSpaces(powerOf(currntLevel)-3) +
+                        writeSpaces(powerOf(currntLevel)-2) +
                                 "("+current.getData()+")"+                     //number data
                                 writeSpaces(powerOf(currntLevel)-3)
                     );
@@ -183,7 +183,7 @@ public class BinaryTree<T> extends Tree {
             if(currntLevel>0) {
                 while (!signs.isEmpty()) {
                     System.out.print(
-                            writeSpaces( 2*powerOf(currntLevel)) +// [2*(2^n)]+1 | n=degree-1
+                            writeSpaces( 2*powerOf(currntLevel)+1) +// [2*(2^n)]+1 | n=degree-1
                                     signs.dequeue() +                                   // print the left node sign '/'
                                     writeSpaces(2*(currntLevel-1)+2) +            // prints space between nodes (2*dgree + 1)
                                     signs.dequeue() +                                    //  prints the right node sign '\'

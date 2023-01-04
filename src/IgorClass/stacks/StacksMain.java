@@ -9,15 +9,16 @@ public class StacksMain {
         System.out.println(stack2.top());
         System.out.println(stack2.pop());
         System.out.println(stack2.top());
+        stack2.printStack();
 
-        Stack<Integer> stack = new Stack();
-        for (int i=0;i < data.length; i++){
-            stack.push(data[i]);
-        }
-        stack.printStack();
-        System.out.println(stack.pop() + " "+" " + stack.top());
-        stack.push(1);
-        stack.printStack();
+//        Stack<Integer> stack = new Stack();
+//        for (int i=0;i < data.length; i++){
+//            stack.push(data[i]);
+//        }
+//        stack.printStack();
+//        System.out.println(stack.pop() + " "+" " + stack.top());
+//        stack.push(1);
+//        stack.printStack();
 
     }
 

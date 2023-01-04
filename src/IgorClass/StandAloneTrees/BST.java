@@ -43,6 +43,8 @@ public class BST <T extends Comparable<T>>{
      */
     protected  int height = 0;
 
+    protected char parentSign= ' ';
+
 //---------------------------------------- Constructor ---------------------------------------------//
 
     /**
@@ -110,6 +112,7 @@ public class BST <T extends Comparable<T>>{
     protected void setRight(BST toSet) {
         this.rightChild = toSet;
         toSet.setParent(this);
+        toSet.parentSign ='\\';
     }
 
     /**
@@ -120,6 +123,8 @@ public class BST <T extends Comparable<T>>{
     protected void setleft (BST toSet){
         this.leftChild = toSet;
         toSet.setParent(this);
+        toSet.parentSign ='/';
+
     }
 
     /**
@@ -183,8 +188,8 @@ public class BST <T extends Comparable<T>>{
 
     }
 
-    public void delete (T tofind){
-        delete(this.find(tofind));
+    public BST delete (T tofind){
+        return delete(this.find(tofind));
     }
 
     private boolean removeChild (BST toRemove){
@@ -205,10 +210,8 @@ public class BST <T extends Comparable<T>>{
         if (toDelete.getParent() == null){
             if (toDelete.leftChild != null) {
                 toDelete.leftChild.insert(toDelete.rightChild);
-                this = toDelete.leftChild;
                 return toDelete.leftChild;
             }else{
-                this = toDelete.rightChild;
                 return toDelete.rightChild;
 
             }
@@ -311,5 +314,51 @@ public class BST <T extends Comparable<T>>{
             }
         }
         return true;
+    }
+
+    public void print_BST(){
+        Queue queue = new Queue(this),signQ= new Queue();
+        int levelSize =1,nextLvlSize =0;
+        BST current;
+        while (!queue.isEmpty()){
+            current =(BST) queue.dequeue();
+            levelSize--;
+            if (current.getLeftChild()!= null) {
+                queue.enqueue(current.leftChild);
+                signQ.enqueue(current.leftChild.parentSign);
+                nextLvlSize++;
+            }else {
+                signQ.enqueue(getSpace(2));
+            }
+            if (current.getRightChild()!= null){
+                queue.enqueue(current.rightChild);
+                signQ.enqueue(current.rightChild.parentSign);
+                nextLvlSize++;
+            }
+            else {
+                signQ.enqueue(getSpace(2));
+            }
+
+            System.out.print(getSpace((levelSize+nextLvlSize)+2) + current.getData() +getSpace((levelSize+nextLvlSize)+1));
+            if (levelSize >0){
+                continue;
+            }else {
+                System.out.println("");
+                while (!signQ.isEmpty()) {
+                    System.out.print(getSpace((levelSize+nextLvlSize)+1)+ signQ.dequeue() );
+                }
+                System.out.println("");
+                levelSize= nextLvlSize;
+                nextLvlSize=0;
+            }
+        }
+    }
+
+    private String getSpace (int numOfSpaces){
+        String spaces = "";
+        for (int i=0;i<numOfSpaces;i++){
+            spaces+= " ";
+        }
+        return spaces;
     }
 }

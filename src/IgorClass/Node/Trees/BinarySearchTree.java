@@ -74,7 +74,7 @@ public class BinarySearchTree <T> extends BinaryTree {
 
         }
         BinarySearchTree thisParent = (BinarySearchTree) toDelete.getParent();
-                            //find the index to the deleted item
+        //find the index to the deleted item
         int indexToDelete = -1;
         for (int i=this.size()-1;i>=0;i--){
             if (thisParent.next(i) == null){
@@ -90,7 +90,7 @@ public class BinarySearchTree <T> extends BinaryTree {
             if (toDelete.next(i) == null){
                 continue;
             }
-                    thisParent.insert((BinarySearchTree) toDelete.next(i));
+            thisParent.insert((BinarySearchTree) toDelete.next(i));
         }
 
 
